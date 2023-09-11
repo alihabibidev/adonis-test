@@ -26,3 +26,4 @@ Route.get('/', async ({ view }) => {
 
 
 Route.get('/post', 'PostsController.index')
+Route.get('/post/ali', 'PostsController.ali')

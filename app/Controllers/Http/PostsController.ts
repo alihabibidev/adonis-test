@@ -6,4 +6,11 @@ export default class PostsController {
     }: HttpContextContract) {
         return response.status(200).json('ok')
     }
+
+    public async ali({
+        view
+    }:HttpContextContract){
+        const html = await view.render('index')
+        return html
+    }
 }
