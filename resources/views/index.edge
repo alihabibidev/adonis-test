@@ -10,3 +10,9 @@
     @end
 
 </h2>
+ 
+<ul>
+@each((user , index) in users)
+  <li> {{index+1}} - {{ user.name }} </li>
+@end
+</ul>

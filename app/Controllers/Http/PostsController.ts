@@ -10,7 +10,22 @@ export default class PostsController {
       id: 1,
       name: 'sajad',
     }
-    const html = await view.render('index', { title: 'ali habibi', user })
+
+    const users = [
+      {
+        id: 1,
+        name: 'sajad',
+      },
+      {
+        id: 2,
+        name: 'amin',
+      },
+      {
+        id: 3,
+        name: 'sadegh',
+      },
+    ]
+    const html = await view.render('index', { title: 'ali habibi', user, users })
     return html
   }
 }
