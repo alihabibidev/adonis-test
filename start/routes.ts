@@ -26,3 +26,10 @@ Route.get('/', async ({ view }) => {
 
 Route.get('/post', 'PostsController.index')
 Route.get('/post/ali', 'PostsController.ali')
+
+Route.get('/home', async ({ view }) => {
+  return view.render('page/home')
+})
+Route.get('/about', async ({ view }) => {
+  return view.render('page/about')
+})
