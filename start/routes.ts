@@ -20,6 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.get('health', async ({ response }) => {
   const report = await HealthCheck.getReport()
@@ -39,4 +40,30 @@ Route.get('/home', async ({ view }) => {
 })
 Route.get('/about', async ({ view }) => {
   return view.render('page/about')
+})
+
+Route.get('/users', async ({ response }) => {
+  try {
+    const users = await Database.from('users').select('*')
+    return response.status(200).json(users)
+  } catch (error) {
+    console.error(error)
+    return response.status(400).json(error?.message)
+  }
+})
+
+Route.post('/users', async ({ response, request }) => {
+  try {
+    const { email, password, last_name, first_name } = request.all()
+    await Database.insertQuery().table('users').insert({
+      email: email,
+      password: password,
+      last_name: last_name,
+      first_name: first_name,
+    })
+    return response.status(200).json('user inserted')
+  } catch (error) {
+    console.error(error)
+    return response.status(400).json(error?.message)
+  }
 })
