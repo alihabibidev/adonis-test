@@ -67,3 +67,20 @@ Route.post('/users', async ({ response, request }) => {
     return response.status(400).json(error?.message)
   }
 })
+
+Route.put('/users/:id', async ({ request, params, response }) => {
+  const { id } = params
+  const { email, password, last_name, first_name } = request.all()
+  try {
+    await Database.from('users').where('id', id).update({
+      first_name,
+      last_name,
+      password,
+      email,
+    })
+    return response.status(200).json('user updated')
+  } catch (error) {
+    console.error(error)
+    return response.status(400).json(error?.message)
+  }
+})
