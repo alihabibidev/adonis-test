@@ -84,3 +84,15 @@ Route.put('/users/:id', async ({ request, params, response }) => {
     return response.status(400).json(error?.message)
   }
 })
+
+Route.delete('/users/:id', async ({ params, response }) => {
+  const { id } = params
+
+  try {
+    await Database.from('users').where('id', id).delete()
+    return response.status(200).json('user deleted')
+  } catch (error) {
+    console.error(error)
+    return response.status(400).json(error?.message)
+  }
+})
